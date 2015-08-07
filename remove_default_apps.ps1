@@ -35,9 +35,6 @@ else
  
 # Run your code that needs to be elevated here
 
-# Activate NoLockScreen
-New-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreen" -Value 1 -PropertyType "DWord" 
-
 # Remove 3DBuilder
 Get-AppxPackage -AllUsers -Name Microsoft.3DBuilder | Remove-AppxPackage
 
@@ -92,11 +89,6 @@ Get-AppxPackage -AllUsers -Name Microsoft.WindowsSoundRecorder | Remove-AppxPack
 # Remove People
 Get-AppxPackage -AllUsers -Name Microsoft.People | Remove-AppxPackage
 
-# Disable Cortana
-New-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Value 0 -PropertyType "DWord"
 
-# Disable tracking
-sc delete DiagTrack
-sc delete dmwappushservice
-echo "" > C:\ProgramData\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl
-New-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Value 0 -PropertyType "DWord" 
+Write-Host "Press any key to continue ..."
+$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
